@@ -17,35 +17,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class Jmf {
 
-    private String fileName;
     private JSONObject jsonObject;
     private List<Object> listOfJsonValues;
     private List<String> listOfJsonKeys;
     private JSONArray jsonArrayValues;
     private JSONObject jsonObjectValues;
 
-    public BufferedReader getFileFromResources(String fileName) {
-        URL url = getClass().getClassLoader().getResource(fileName);
+    private BufferedReader getFileFromResources(URL file) {
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(new File(Objects.requireNonNull(url).getFile())));
+            bufferedReader = new BufferedReader(new FileReader(new File(Objects.requireNonNull(file).getFile())));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return bufferedReader;
     }
 
-    public Jmf setFileName(String fileName) {
-        this.fileName = fileName;
-        return this;
-    }
-
-    public Jmf setJsonObject() {
+    public Jmf setJsonObject(URL file) {
         JSONTokener jsonTokener = null;
         try {
-            jsonTokener = new JSONTokener(Objects.requireNonNull(getFileFromResources(fileName)));
+            jsonTokener = new JSONTokener(Objects.requireNonNull(getFileFromResources(file)));
         } catch (final NullPointerException ex) {
-            log.error("Unable to read json file '{}'", fileName);
+            log.error("Unable to read json file '{}'", file);
         }
         assert jsonTokener != null;
         jsonObject = new JSONObject(jsonTokener);
