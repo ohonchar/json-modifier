@@ -35,4 +35,5 @@ dependencies {
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
     compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
     compile group: 'org.json', name: 'json', version: "${jsonVersion}"
+    compile "org.assertj:assertj-core:${assertjVersion}"
 }

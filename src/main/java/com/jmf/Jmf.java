@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.net.URL;
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @Slf4j
 public class Jmf {
 
